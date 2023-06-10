@@ -73,12 +73,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 Nest is [MIT licensed](LICENSE).
 
 # typescript-nestjs-example
-### GitHub
-```sh
-$ git init
-$ git add README.md
-$ git commit -m "first commit"
-$ git branch -M main
-$ git remote add origin git@github.com:taaaaakahiro/typescript-nestjs-example.git
-$ git push -u origin main
-```

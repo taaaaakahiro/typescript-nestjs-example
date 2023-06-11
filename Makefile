@@ -7,4 +7,7 @@ jest: lint
 clean:
 	npm cache verify
 
+init:
+	npx prisma migrate dev --name todo && npx ts-node src/seeding/todo.ts
+
 .PHONT: jest

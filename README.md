@@ -71,16 +71,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-
-# typescript-nestjs-example
-
-
-## command
-```sh
-$ npx nest g controller <new conrtoller name>
-$ npx nest g service <new conrtoller name>
-$ npx prisma migrate dev --name <>
-```
-
-## article
-  - https://zenn.dev/mikakane/books/nestjs-tutorial/viewer/setup

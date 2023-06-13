@@ -1,0 +1,68 @@
+name: test & build & push
+
+on:
+  workflow_dispatch:
+    inputs:
+      docker-image-version:
+        type: string
+        description: input image version
+        required: true
+        default: latest
+   
+jobs:
+  test_build_push:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        postgres-version: [ '12' ]
+        postgres-dbname: [ 'postgres' ]
+        postgres-host: [ 'localhost' ]
+        postgres-user: [ 'postgres' ]
+        postgres-password: [ 'postgres' ]
+
+    services:
+      db:
+        image: postgres:${{ matrix.postgres-version }}
+        ports:
+          - 54321:5432
+        env:
+          POSTGRES_USER: ${{ matrix.postgres-user }}
+          POSTGRES_PASSWORD: ${{ matrix.postgres-password }}
+          POSTGRES_DB: ${{ matrix.postgres-dbname }}
+        options:
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: set up node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+
+      - run: node -v
+
+      - name: npm install
+        run: npm ci
+
+      - name: generate prisma client
+        run: npx prisma generate
+      
+      - name: execute Lint
+        run: npm run lint
+
+      - name: test
+        run: npm run test
+
+      - name: build
+        run: npm run build
+
+      - name: Build And Push ECR
+        run: |
+          docker build -t typescript-nestjs-example .
+          # docker tag terraform-ecs-fargate-spot:latest ${{ secrets.AWS_ECR_REGISTRY_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/typescript-nestjs-example:${{ inputs.docker-image-version }}
+          # docker push ${{ secrets.AWS_ECR_REGISTRY_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/dev-terraform-ecs-fargate-spot-ecr:${{ inputs.docker-image-version }}
+
+

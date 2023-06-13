@@ -1,21 +1,30 @@
-import { Body, Controller, Get, Post, Param, Put, Delete } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
+// import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTaskDto } from './create-task.dto';
 import { UpdateTaskDto } from './update-task.dto';
 import { DeleteTaskDto } from './delete-task.dto';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 @Controller('todo')
 export class TodoController {
-  constructor(private prisma: PrismaService) {}
-
   @Get('list')
   async listTasks() {
-    const result = await this.prisma.task.findMany({
+    const result = await prisma.task.findMany({
       where: {
         is_done: false,
       },
       orderBy: {
-        id: "asc"
+        id: 'asc',
       },
     });
     return [...result];
@@ -23,7 +32,7 @@ export class TodoController {
 
   @Post('')
   async postTask(@Body() task: CreateTaskDto) {
-    const result = await this.prisma.task.create({
+    const result = await prisma.task.create({
       data: task,
     });
     return {
@@ -33,7 +42,7 @@ export class TodoController {
 
   @Put(':id/done')
   async updateTasks(@Param() param: UpdateTaskDto) {
-    await this.prisma.task.updateMany({
+    await prisma.task.updateMany({
       data: {
         is_done: true,
       },
@@ -48,7 +57,7 @@ export class TodoController {
 
   @Delete(':id')
   async deleteTask(@Param() param: DeleteTaskDto) {
-    await this.prisma.task.delete({
+    await prisma.task.delete({
       // data: {
       //   is_done: true,
       // },

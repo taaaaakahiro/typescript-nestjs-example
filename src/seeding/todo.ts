@@ -1,13 +1,35 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+
 async function main() {
-  const tasks = ['牛乳を買いに行く', '部屋の掃除をする', '実家へ電話をかける'];
+  const users = [
+    {mail: 'test1@gmail.com'},
+    {mail: 'test2@gmail.com'},
+    {mail: 'test3@gmail.com'},
+  ];
+
+  const profiles = [
+    {name: 'name1', userId: 1},
+    {name: 'name2', userId: 2},
+    {name: 'name3', userId: 3},
+  ];
 
   await Promise.all(
-    tasks.map((task) => {
-      return prisma.task.create({
+    users.map((u) => {
+      return prisma.user.create({
         data: {
-          title: task,
+          email: u.mail,
+        },
+      });
+    }),
+  );
+
+  await Promise.all(
+    profiles.map((p) => {
+      return prisma.profile.create({
+        data: {
+          name: p.name,
+          userId: p.userId
         },
       });
     }),

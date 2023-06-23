@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 @Injectable()
 export class TodoService {
   async listTodos() {
-    const res = await prisma.user.findMany({
+    const res = await prisma.todo.findMany({
       orderBy: {
         id: 'desc',
       },
@@ -16,7 +16,7 @@ export class TodoService {
   }
 
   async getTodo(id: number) {
-    const res = await prisma.user.findUnique({
+    const res = await prisma.todo.findUnique({
       where: { id },
     });
 

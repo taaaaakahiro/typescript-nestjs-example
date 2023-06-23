@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-arm64-openssl-1.1.x"] //add
 }
 
@@ -16,23 +16,27 @@ model User {
   id      Int      @id @default(autoincrement())
   email   String
   profile Profile?
-  messages Message[]
+  todo    Todo[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
+
 // OneToOne Table
 model Profile {
-  id     Int  @id @default(autoincrement())
-  name String
-  user   User @relation(fields: [userId], references: [id]) // fields: [userId] = Profile.userId, references: [User.id]
-  userId Int @unique// relation scalar field (used in the `@relation` attribute above)
+  id     Int    @id
+  name   String
+  user   User   @relation(fields: [userId], references: [id]) // fields: [userId] = Profile.userId, references: [User.id]
+  userId Int    @unique // relation scalar field (used in the `@relation` attribute above)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
+
 // OneToMany Table
-model Message {
- id       Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
+model Todo {
+  id     Int    @id @default(autoincrement())
+  text   String
+  user   User   @relation(fields: [userId], references: [id])
   userId Int
- 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
-
-
-
-

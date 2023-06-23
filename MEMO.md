@@ -28,12 +28,12 @@ $ curl -X DELETE http://localhost:3001/todo/{id}
 ```
 
 ## todo
-  - [x] seeding
-  - [] middleware
-  - [] interceptor
-  - [] cors
-  - [] GraphQL
-  - [] Unit Test (Service, Controller)
+  - [x] seeding. 
+  - [] middleware. 
+  - [] interceptor. 
+  - [] cors. 
+  - [] GraphQL. 
+  - [] Unit Test (Service, Controller). 
 
 
 ## article

@@ -11,16 +11,30 @@ $ npx nest g service prisma #DB接続用に仕様する拡張サービス
 $ npx prisma migrate dev --name <file name> #create table
 $ npx ts-node src/seeding/todo.ts #seeding
 $ npx prisma generate #execute the case to modify prisma.schema file
+
+#format
+$ npx prisma format # for schema.prisma
+$ make lint # for *.ts
 ```
 
 ## curl
 ```sh
-$ curl http://localhost:3000
-$ curl http://localhost:3000/todo/list
-$ curl http://localhost:3000/todo -s -X POST -d '{"title":"sample"}' -H "Content-Type: application/json"
-$ curl -X PUT http://localhost:3000/todo/{id}/done
-$ curl -X DELETE http://localhost:3000/todo/{id}
+$ curl http://localhost:3001
+$ curl http://localhost:3001/todo # list todo
+$ curl http://localhost:3001/todo/{id} # get todo by id
+$ curl http://localhost:3001/todo -s -X POST -d '{"title":"sample"}' -H "Content-Type: application/json"
+$ curl -X PUT http://localhost:3001/todo/{id}/done
+$ curl -X DELETE http://localhost:3001/todo/{id}
 ```
+
+## todo
+  - [x] seeding
+  - [] middleware
+  - [] interceptor
+  - [] cors
+  - [] GraphQL
+  - [] Unit Test (Service, Controller)
+
 
 ## article
   - https://zenn.dev/mikakane/books/nestjs-tutorial/viewer/setup

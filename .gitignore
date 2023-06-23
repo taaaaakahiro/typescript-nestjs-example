@@ -36,3 +36,6 @@ lerna-debug.log*
 
 .env
 .envrc
+
+# prisma auto generate
+migrations

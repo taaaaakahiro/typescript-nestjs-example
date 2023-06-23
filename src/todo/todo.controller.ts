@@ -1,30 +1,20 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Param,
-  Put,
-  Delete,
-} from '@nestjs/common';
-// import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateTaskDto } from './create-task.dto';
-import { UpdateTaskDto } from './update-task.dto';
-import { DeleteTaskDto } from './delete-task.dto';
-import { PrismaClient } from '@prisma/client';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { TodoService } from './todo.service';
 
-const prisma = new PrismaClient();
-
-@Controller('user')
+@Controller('todo')
 export class TodoController {
-  @Get('list')
-  async listTasks() {
-    const result = await prisma.user.findMany({
-      orderBy: {
-        id: 'desc',
-      },
-    });
-    return [...result];
+  constructor(private readonly todoService: TodoService) {}
+
+  //全件取得
+  @Get('')
+  async listTodos() {
+    return this.todoService.listTodos();
+  }
+
+  //1件取得(パスパラメータ指定`id`)
+  @Get(':id')
+  async getTodo(@Param('id', ParseIntPipe) id: number) {
+    return this.todoService.getTodo(id);
   }
 
   // @Post('')

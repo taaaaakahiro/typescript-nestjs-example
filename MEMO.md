@@ -34,6 +34,8 @@ $ curl -X DELETE http://localhost:3001/todo/{id}
   - [] cors. 
   - [] GraphQL. 
   - [] Unit Test (Service, Controller). 
+  - [] error handling
+  - [] transaction. 
 
 
 ## article

@@ -7,8 +7,12 @@ async function bootstrap() {
     logger: ['error', 'warn', 'log'], // init buildin logger
   });
 
-  // init validator
+  // app.use(csurf()); // apply csrf
+
+  app.enableCors(); // apply cors
+
   app.useGlobalPipes(
+    // init validator
     new ValidationPipe({
       //options here
     }),

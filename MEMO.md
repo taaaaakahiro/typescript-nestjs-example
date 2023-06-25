@@ -22,18 +22,15 @@ $ make lint # for *.ts
 $ curl http://localhost:3001
 $ curl http://localhost:3001/todo # list todo
 $ curl http://localhost:3001/todo/{id} # get todo by id
-$ curl http://localhost:3001/todo -s -X POST -d '{"title":"sample"}' -H "Content-Type: application/json"
-$ curl -X PUT http://localhost:3001/todo/{id}/done
-$ curl -X DELETE http://localhost:3001/todo/{id}
 ```
 
 ## todo
   - [x] seeding. 
-  - [] middleware. 
+  - [x] middleware. 
   - [] interceptor. 
-  - [] cors. 
+  - [x] cors. 
   - [] GraphQL. 
-  - [] Unit Test (Service, Controller). 
+  - [x] Unit Test (Service, Controller). 
   - [] error handling
   - [] transaction. 
 

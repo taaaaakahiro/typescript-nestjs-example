@@ -1,5 +1,13 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { TodoService } from './todo.service';
+import { CreateTodoDto } from './dto/create-todo.dto';
 
 @Controller('todo')
 export class TodoController {
@@ -17,15 +25,11 @@ export class TodoController {
     return this.todoService.getTodo(id);
   }
 
-  // @Post('')
-  // async postTask(@Body() task: CreateTaskDto) {
-  //   const result = await prisma.task.create({
-  //     data: task,
-  //   });
-  //   return {
-  //     status: '201',
-  //   };
-  // }
+  //1件登録(バリデーションあり)
+  @Post('')
+  async postTask(@Body() input: CreateTodoDto) {
+    return this.todoService.createTodo(input);
+  }
 
   // @Put(':id/done')
   // async updateTasks(@Param() param: UpdateTaskDto) {

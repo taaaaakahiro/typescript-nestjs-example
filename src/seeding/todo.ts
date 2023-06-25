@@ -21,6 +21,7 @@ async function main() {
   ];
   // Cleanup
   await prisma.profile.deleteMany();
+  await prisma.todo.deleteMany();
   await prisma.user.deleteMany();
 
   //Start Seeding

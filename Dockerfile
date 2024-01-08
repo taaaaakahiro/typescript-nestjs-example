@@ -1,5 +1,5 @@
 # ビルド環境
-FROM node:19-bullseye-slim as builder
+FROM node:20-bullseye-slim as builder
 WORKDIR /app
 
 RUN apt-get update \
@@ -17,7 +17,7 @@ RUN npm run build
 RUN npx prisma generate
 
 # 実行環境
-FROM node:19-bullseye-slim
+FROM node:20-bullseye-slim
 ENV NODE_ENV production
 WORKDIR /app
 
